@@ -37,6 +37,7 @@ async function connect() {
   await mongoose.connect(config.MONGO_URL, {
     useNewUrlParser: true,
     useFindAndModify: false,
+    useUnifiedTopology: true,
   });
   logger.info('connected to mongo');
 
