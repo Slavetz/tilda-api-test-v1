@@ -1,7 +1,7 @@
 const { Projects } = require('../dataLayer');
 
-const get = async (filter) => Projects.Read(filter);
-const patch = async (filter, data) => Projects.Update(filter, data);
+const get = async (projectid) => Projects.Read({ projectid });
+const patch = async (projectid, data) => Projects.Update({ projectid }, data);
 
 module.exports = {
   get,

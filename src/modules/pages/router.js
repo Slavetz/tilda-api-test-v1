@@ -5,9 +5,7 @@ const PagesHandlers = require('./handlers');
 const PagesRouter = Router();
 
 PagesRouter.get('/:pageid', (req, res) => {
-  const filter = { pageid: req.params.pageid };
-
-  PagesHandlers.get(filter).then((page) => {
+  PagesHandlers.get(req.params.pageid, req.query).then((page) => {
     res.send(page);
   });
 });
