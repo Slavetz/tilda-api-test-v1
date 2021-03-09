@@ -21,22 +21,30 @@ const fetchProjectData = async (project, type) => {
 const syncProjectData = async (project) => {
   const data = await fetchProjectData(project, 'getproject');
 
-  return data && Projects.Update({ _id: project._id }, data);
+  return data && Projects.findOneAndUpdate({ _id: project._id },
+      { $set: data },
+      {
+        new: true,
+      });
 };
 
 const syncProjectPageList = async (project) => {
-  const data = await fetchProjectData(project, 'getpageslist');
+  const pagesList = await fetchProjectData(project, 'getpageslist');
 
   const options = {
     upsert: true,
     setDefaultsOnInsert: true,
   };
 
-  return data && Promise.all(data.map((page) => {
-    const filter = { pageid: page.pageid };
-    const pageData = { ...page, _projectid: project._id };
+  return pagesList && Promise.all(pagesList.map((page) => {
+    const data = { ...page, _projectid: project._id };
 
-    return Pages.Update(filter, pageData, options);
+    return Pages.findOneAndUpdate({ pageid: page.pageid },
+        { $set: data },
+        {
+          new: true,
+          ...options,
+        });
   }));
 };
 

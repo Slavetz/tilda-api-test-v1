@@ -6,8 +6,8 @@ const pagesModel = require('./pages/model');
 console.log('projectsModel', projectsModel);
 console.log('pagesModel', pagesModel);
 
-const Projects = new DBMethods(projectsModel);
-const Pages = new DBMethods(pagesModel);
+const Projects = projectsModel
+const Pages = pagesModel
 
 module.exports = {
   Projects,

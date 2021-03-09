@@ -12,12 +12,12 @@ const get = async (data) => {
     // publickey,
   } = data;
 
-  const project = await Projects.Read({ projectid });
+  const project = await Projects.findOne({ projectid });
 
   if (!project) return;
   await projectsMethods.syncProjectData(project);
 
-  const page = await Pages.Read({ pageid });
+  const page = await Pages.findOne({ pageid });
 
   if (!page) {
     await projectsMethods.syncProjectPageList(project);
