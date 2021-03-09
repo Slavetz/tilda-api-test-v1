@@ -1,8 +1,8 @@
 const { Router } = require('express');
 
-const { projectsRouter } = require('./projects');
-const { pagesRouter } = require('./pages');
-const { syncRouter } = require('./sync');
+const projectsRouter = require('./projects/router');
+const pagesRouter = require('./pages/router');
+const syncRouter = require('./sync/router');
 
 const baseRouter = Router();
 
