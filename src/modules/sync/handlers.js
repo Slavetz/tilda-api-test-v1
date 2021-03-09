@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars  */
 const { Projects, Pages } = require('../dataLayer');
-const { ProjectsMethods } = require('../projects');
-const { PagesMethods } = require('../pages');
+const { projectsMethods } = require('../projects');
+const { pagesMethods } = require('../pages');
 
 const get = async (data) => {
   console.log('>>> Sync', data);
@@ -15,14 +15,14 @@ const get = async (data) => {
   const project = await Projects.Read({ projectid });
 
   if (!project) return;
-  await ProjectsMethods.syncProjectData(project);
+  await projectsMethods.syncProjectData(project);
 
   const page = await Pages.Read({ pageid });
 
   if (!page) {
-    await ProjectsMethods.syncProjectPageList(project);
+    await projectsMethods.syncProjectPageList(project);
   } else {
-    await PagesMethods.syncPageData(page);
+    await pagesMethods.syncPageData(page);
   }
 };
 
