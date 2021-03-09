@@ -4,10 +4,6 @@ const ProjectsHandlers = require('./handlers');
 
 const ProjectsRouter = Router();
 
-ProjectsRouter.get('/:projectid', (req, res) => {
-  ProjectsHandlers.get(req.params.projectid).then((project) => {
-    res.send(project);
-  });
-});
+ProjectsRouter.get('/:projectid', ProjectsHandlers.get);
 
 module.exports = ProjectsRouter;

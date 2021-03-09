@@ -1,31 +1,23 @@
-const { Projects, Pages } = require('../dataLayer');
+const model = require('../pages/model');
 
-const { fetchDataFromTilda } = require('../../services/tilda');
+const Projects = { model };
 
-const fetchProjectData = async (project, type) => {
-  const {
-    publickey,
-    secretkey,
-    projectid,
-  } = project;
+const Pages = require('../pages');
 
-  const params = {
-    publickey,
-    secretkey,
-    projectid,
-  };
+console.log('>>> ProjectsMethods', 'Pages:', Pages, 'Projects:', !!Projects.model);
 
-  return fetchDataFromTilda(type, params);
-};
+const { fetchProjectData } = require('../../services/tilda');
+
+const getProject = async (projectid) => Projects.model.findOne({ projectid });
 
 const syncProjectData = async (project) => {
   const data = await fetchProjectData(project, 'getproject');
 
-  return data && Projects.findOneAndUpdate({ _id: project._id },
-      { $set: data },
-      {
-        new: true,
-      });
+  return data && Projects.model.findOneAndUpdate({ _id: project._id },
+    { $set: data },
+    {
+      new: true,
+    });
 };
 
 const syncProjectPageList = async (project) => {
@@ -39,16 +31,17 @@ const syncProjectPageList = async (project) => {
   return pagesList && Promise.all(pagesList.map((page) => {
     const data = { ...page, _projectid: project._id };
 
-    return Pages.findOneAndUpdate({ pageid: page.pageid },
-        { $set: data },
-        {
-          new: true,
-          ...options,
-        });
+    return Pages.model.findOneAndUpdate({ pageid: page.pageid },
+      { $set: data },
+      {
+        new: true,
+        ...options,
+      });
   }));
 };
 
 module.exports = {
+  getProject,
   syncProjectData,
   syncProjectPageList,
 };

@@ -1,32 +1,12 @@
-/* eslint-disable no-unused-vars  */
-const { Projects, Pages } = require('../dataLayer');
-const { projectsMethods } = require('../projects');
-const { pagesMethods } = require('../pages');
+const SyncMethods = require('./methods');
 
-const get = async (data) => {
-  console.log('>>> Sync', data);
-  const {
-    pageid,
-    projectid,
-    // published,
-    // publickey,
-  } = data;
+const get = (req, res) => {
+  const { params: { pageid } } = req;
 
-  const project = await Projects.findOne({ projectid });
-
-  if (!project) return;
-  await projectsMethods.syncProjectData(project);
-
-  const page = await Pages.findOne({ pageid });
-
-  if (!page) {
-    await projectsMethods.syncProjectPageList(project);
-  } else {
-    await pagesMethods.syncPageData(page);
-  }
+  SyncMethods.syncPage(pageid);
+  res.send('ok');
 };
 
 module.exports = {
   get,
 };
-

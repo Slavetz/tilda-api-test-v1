@@ -5,7 +5,7 @@ const fetchDataFromTilda = async (type, params) => {
 
   const url = `http://api.tildacdn.info/v1/${type}`;
 
-  const responce = await Axios.get(url, { params })
+  const response = await Axios.get(url, { params })
     .then((res) => res.data)
     .catch((e) => {
       console.log(e);
@@ -13,11 +13,49 @@ const fetchDataFromTilda = async (type, params) => {
       return { status: 'CATCH' };
     });
 
-  const data = responce.status === 'FOUND' && responce.result;
+  const data = response.status === 'FOUND' && response.result;
 
   return data || null;
 };
 
+const fetchPageData = async (page, type, project) => {
+  // eslint-disable-next-line no-underscore-dangle
+
+  const {
+    publickey,
+    secretkey,
+  } = project;
+
+  const {
+    pageid,
+  } = page;
+
+  const params = {
+    publickey,
+    secretkey,
+    pageid,
+  };
+
+  return fetchDataFromTilda(type, params);
+};
+
+const fetchProjectData = async (project, type) => {
+  const {
+    publickey,
+    secretkey,
+    projectid,
+  } = project;
+
+  const params = {
+    publickey,
+    secretkey,
+    projectid,
+  };
+
+  return fetchDataFromTilda(type, params);
+};
+
 module.exports = {
-  fetchDataFromTilda,
+  fetchPageData,
+  fetchProjectData,
 };

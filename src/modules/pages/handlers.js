@@ -1,25 +1,17 @@
-const { Pages, Projects } = require('../dataLayer');
+const PagesMethods = require('./methods');
 
-const get = async (pageid, { extend = false }) => {
-  const page = await Pages.findOne({ pageid });
+const get = async (req, res) => {
+  const {
+    params: { pageid },
+    query: { extend = false },
+  } = req;
 
-  if (!extend) return page;
-  const project = await Projects.findOne({ projectid: page.projectid });
-  const { css, js } = project;
+  const page = await PagesMethods.getPage(pageid, extend);
 
-  // eslint-disable-next-line no-underscore-dangle
-  return { ...page._doc, css, js };
+  res.send(page);
 };
-const patch = async (pageid, data) => Pages.findOneAndUpdate({ pageid },
-        { $set: data },
-        {
-          new: true,
-        });
-
-
 
 module.exports = {
   get,
-  patch,
 };
 

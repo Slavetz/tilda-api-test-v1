@@ -1,5 +1,7 @@
-const pagesMethods = require('./methods');
+const model = require('./model');
+const methods = require('./methods');
 
 module.exports = {
-  pagesMethods,
+  model,
+  methods,
 };

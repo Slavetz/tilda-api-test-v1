@@ -1,5 +1,5 @@
-const syncRouter = require('./router');
+const methods = require('./methods');
 
 module.exports = {
-  syncRouter,
+  methods,
 };

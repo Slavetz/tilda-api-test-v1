@@ -1,14 +1,19 @@
-const { Projects } = require('../dataLayer');
+const ProjectsMethods = require('./methods');
 
-const get = async (projectid) => Projects.findOne({ projectid });
-const patch = async (projectid, data) => Projects.findOneAndUpdate(filter,
-    { $set: data },
-    {
-      new: true,
-    });
+const get = async (req, res) => {
+  const {
+    params: { projectid },
+  } = req;
+
+  console.log('projectid', projectid);
+  const project = await ProjectsMethods.getProject(projectid);
+
+  console.log('project', project);
+
+  res.send(project);
+};
 
 module.exports = {
   get,
-  patch,
 };
 
