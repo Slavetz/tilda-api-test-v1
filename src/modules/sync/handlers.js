@@ -1,12 +1,16 @@
-const SyncMethods = require('./methods');
+const syncMethods = require('./methods');
+const { pagesMethods } = require('../pages');
+const { projectsMethods } = require('../projects');
 
-const get = (req, res) => {
+console.log('>>> SyncHandler', !!pagesMethods, !!syncMethods, !!projectsMethods);
+
+const hook = (req, res) => {
   const { params: { pageid } } = req;
 
-  SyncMethods.syncPage(pageid);
+  syncMethods.syncHook(pageid);
   res.send('ok');
 };
 
 module.exports = {
-  get,
+  hook,
 };

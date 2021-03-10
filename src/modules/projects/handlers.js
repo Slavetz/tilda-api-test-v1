@@ -1,4 +1,8 @@
-const ProjectsMethods = require('./methods');
+const projectsMethods = require('./methods');
+const { pagesMethods } = require('../pages');
+const { syncMethods } = require('../sync');
+
+console.log('>>> ProjectsHandler', !!pagesMethods, !!syncMethods, !!projectsMethods);
 
 const get = async (req, res) => {
   const {
@@ -6,7 +10,7 @@ const get = async (req, res) => {
   } = req;
 
   console.log('projectid', projectid);
-  const project = await ProjectsMethods.getProject(projectid);
+  const project = await projectsMethods.getProject(projectid);
 
   console.log('project', project);
 

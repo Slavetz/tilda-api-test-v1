@@ -1,4 +1,9 @@
-const PagesMethods = require('./methods');
+const pagesMethods = require('./methods');
+const { projectsMethods } = require('../projects');
+const { syncMethods } = require('../sync');
+
+console.log('>>> PagesHandler', !!pagesMethods, !!syncMethods, !!projectsMethods);
+
 
 const get = async (req, res) => {
   const {
@@ -6,7 +11,7 @@ const get = async (req, res) => {
     query: { extend = false },
   } = req;
 
-  const page = await PagesMethods.getPage(pageid, extend);
+  const page = await pagesMethods.getPage(pageid, extend);
 
   res.send(page);
 };

@@ -1,5 +1,1 @@
-const methods = require('./methods');
-
-module.exports = {
-  methods,
-};
+module.exports.syncMethods = require('./methods')

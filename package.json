@@ -25,6 +25,7 @@
     "mongoose": "^5.11.19"
   },
   "devDependencies": {
+    "arkit": "^1.6.4",
     "eslint": "6.4.0",
     "eslint-config-airbnb": "18.0.1",
     "eslint-config-airbnb-base": "14.0.0",

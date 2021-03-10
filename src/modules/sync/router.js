@@ -4,6 +4,6 @@ const SyncHandlers = require('./handlers');
 
 const SyncRouter = Router();
 
-SyncRouter.get('/', SyncHandlers.get);
+SyncRouter.get('/hook', SyncHandlers.hook);
 
 module.exports = SyncRouter;

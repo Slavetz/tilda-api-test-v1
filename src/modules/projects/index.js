@@ -1,7 +1,2 @@
-const model = require('./model');
-const methods = require('./methods');
-
-module.exports = {
-  model,
-  methods,
-};
+module.exports.projectsMethods = require('./methods')
+module.exports.projectsModel = require('./model')
