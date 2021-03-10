@@ -1,5 +1,6 @@
 const { pagesModel } = require('../pages');
 const { projectsModel } = require('../projects');
+const { fetchProjectData, fetchPageData } = require('../../services/tilda');
 
 console.log('>>> syncMethods', !!pagesModel, !!projectsModel)
 

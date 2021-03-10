@@ -5,9 +5,8 @@ const { projectsMethods } = require('../projects');
 console.log('>>> SyncHandler', !!pagesMethods, !!syncMethods, !!projectsMethods);
 
 const hook = (req, res) => {
-  const { params: { pageid } } = req;
-
-  syncMethods.syncHook(pageid);
+  const { query } = req;
+  syncMethods.syncHook(query);
   res.send('ok');
 };
 
