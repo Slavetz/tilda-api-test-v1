@@ -13,6 +13,8 @@ const get = async (req, res) => {
 
   const page = await pagesMethods.getPage(pageid, extend);
 
+  if (!page) res.status(400).send(`Bad Request, project: ${page}`);
+
   res.send(page);
 };
 

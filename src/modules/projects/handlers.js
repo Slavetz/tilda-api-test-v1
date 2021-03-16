@@ -12,7 +12,8 @@ const get = async (req, res) => {
   console.log('projectid', projectid);
   const project = await projectsMethods.getProject(projectid);
 
-  console.log('project', project);
+
+  if (!project) res.status(400).send(`Bad Request, project: ${project}`);
 
   res.send(project);
 };

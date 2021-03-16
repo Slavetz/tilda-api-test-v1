@@ -58,6 +58,8 @@ const syncHook = async (data) => {
     // publickey,
   } = data;
 
+  if (!pageid || !projectid) return;
+
   const project = await projectsModel.findOne({ projectid });
 
   if (!project) return;
